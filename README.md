@@ -1,4 +1,4 @@
-<img src="Screenshots/cover.jpg" >
+<img src="Screenshots/coverimage.jpg" >
 
 # IMDb-demo
 
