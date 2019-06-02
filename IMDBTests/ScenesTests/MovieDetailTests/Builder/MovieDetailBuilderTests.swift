@@ -11,14 +11,12 @@ import XCTest
 
 class MovieDetailBuilderTests: XCTestCase {
 
-    var builder: MovieDetailBuilder!
     var view: MovieDetailViewController!
     
     override func setUp() {
         
-        builder = MovieDetailBuilderImpl()
         let upcomingMovies = try! JSONDecoder().decode(UpcomingMovies.self, from: upcomingMovieSuccessStub)
-        view = builder.build(withMovie: upcomingMovies.results?.first)
+        view = (SceneFactory.shared().getScene(sceneType: .MovieDetail, withMovie: upcomingMovies.results?.first) as! MovieDetailViewController)
     }
 
     func testBuilderBuildViewModelProperly() {

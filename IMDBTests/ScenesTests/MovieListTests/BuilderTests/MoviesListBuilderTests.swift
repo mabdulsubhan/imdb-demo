@@ -11,18 +11,15 @@ import XCTest
 
 class MoviesListBuilderTests: XCTestCase {
     
-    var builder: MoviesListBuilder!
     var view: MovieListViewController!
 
     override func setUp() {
         
-        builder = MoviesListBuilderImpl()
-        view = builder.build()
+        view = (SceneFactory.shared().getScene(sceneType: .MovieList) as! MovieListViewController)
       
     }
 
     override func tearDown() {
-        builder = nil
         view = nil
     }
 
