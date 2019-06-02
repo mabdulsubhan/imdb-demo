@@ -8,17 +8,17 @@
 
 import UIKit
 
-typealias MovieDetailModelOutput = (MovieDetailViewModelImp.Output) -> ()
+typealias MovieDetailModelOutput = (MovieDetailViewModel.Output) -> ()
 
 /// MovieDetailViewModel Protocol
-protocol MovieDetailViewModel {
+protocol MovieDetailViewModelProtocol {
     
     var output: MovieDetailModelOutput? { get set }
     func didLoad()
 }
 
 /// MovieDetailViewModel Implementation
-final class MovieDetailViewModelImp: MovieDetailViewModel {
+final class MovieDetailViewModel: MovieDetailViewModelProtocol {
 
     /// View Output Bindings
     enum Output {

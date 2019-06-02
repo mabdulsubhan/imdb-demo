@@ -42,7 +42,7 @@ class SceneFactory {
         dataProvider.movieService = MovieListServiceImpl()
         let coordinator = MoviesListCoordinatorImpl(view: viewController)
         
-        let viewModel = MovieListViewModelImp(withDataProvider: dataProvider, andCoordinator: coordinator)
+        let viewModel = MovieListViewModel(withDataProvider: dataProvider, andCoordinator: coordinator)
         
         dataProvider.delegate = viewModel
         viewModel.dataProvider = dataProvider
@@ -57,7 +57,7 @@ class SceneFactory {
         
         let storyboard = UIStoryboard(name: UIStoryboard.Name.moviesDetails.rawValue, bundle: Bundle.main)
         let viewController = storyboard.instantiateViewController(withIdentifier: UIViewController.Name.moviesDetails.rawValue) as! MovieDetailViewController
-        let viewModel = MovieDetailViewModelImp(movie)
+        let viewModel = MovieDetailViewModel(movie)
         viewController.viewModel = viewModel
         
         return viewController

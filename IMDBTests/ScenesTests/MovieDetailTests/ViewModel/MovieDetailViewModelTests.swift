@@ -12,7 +12,7 @@ import XCTest
 class MovieDetailViewModelTests: XCTestCase {
 
    
-    var  viewModel: MovieDetailViewModel!
+    var  viewModel: MovieDetailViewModelProtocol!
     var  view = MockMovieDetailViewController()
     
     override func tearDown() {
@@ -22,7 +22,7 @@ class MovieDetailViewModelTests: XCTestCase {
     func testViewDidLoad() {
         //Given
         let upcomingMovies = try! JSONDecoder().decode(UpcomingMovies.self, from: upcomingMovieSuccessStub)
-        viewModel = MovieDetailViewModelImp(upcomingMovies.results?.first)
+        viewModel = MovieDetailViewModel(upcomingMovies.results?.first)
         view.viewModel = viewModel
         view.bindViewModelOutput()
         
@@ -43,7 +43,7 @@ class MovieDetailViewModelTests: XCTestCase {
     func testViewDidLoaddd() {
         //Given
         let upcomingMovies = try! JSONDecoder().decode(UpcomingMovies.self, from: upcomingMovieNilStub)
-        let viewModel = MovieDetailViewModelImp(upcomingMovies.results?.first)
+        let viewModel = MovieDetailViewModel(upcomingMovies.results?.first)
         view.viewModel = viewModel
         view.bindViewModelOutput()
         

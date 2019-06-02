@@ -19,7 +19,7 @@ class MovieListViewController: UIViewController {
     @IBOutlet var noDataView: UIView!
     
     var datePickerTopConstraint = NSLayoutConstraint()
-    var viewModel: MovieListViewModel!
+    var viewModel: MovieListViewModelProtocol!
  
     
     /// View Life cycle Method

@@ -12,7 +12,7 @@ import XCTest
 class MovieListViewModelTests: XCTestCase {
     
     var  dataProvider: MockMovieListDataProvider!
-    var  viewModel: MovieListViewModelImp!
+    var  viewModel: MovieListViewModel!
     var  view = MockMovieListViewController()
 
     override func setUp() {
@@ -20,7 +20,7 @@ class MovieListViewModelTests: XCTestCase {
         dataProvider = MockMovieListDataProvider()
         
         let coordinator = MoviesListCoordinatorImpl(view: UIViewController())
-        viewModel = MovieListViewModelImp(withDataProvider: dataProvider, andCoordinator: coordinator)
+        viewModel = MovieListViewModel(withDataProvider: dataProvider, andCoordinator: coordinator)
         dataProvider.delegate = viewModel
         view.viewModel = viewModel
         view.bindViewModelOutput()

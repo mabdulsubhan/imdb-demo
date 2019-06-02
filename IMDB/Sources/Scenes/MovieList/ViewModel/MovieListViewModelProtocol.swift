@@ -8,10 +8,10 @@
 
 import Foundation
 
-typealias MoviesViewModelOutput = (MovieListViewModelImp.Output) -> ()
+typealias MoviesViewModelOutput = (MovieListViewModel.Output) -> ()
 
 /// MovieListViewModel Protocol
-protocol MovieListViewModel {
+protocol MovieListViewModelProtocol {
 
     var dataProvider: MovieListDataProvider! { get }
     var coordinator: MoviesListCoordinator! { get }
@@ -27,7 +27,7 @@ protocol MovieListViewModel {
 }
 
 /// MovieListViewModel Implementation
-final class MovieListViewModelImp: MovieListViewModel {
+final class MovieListViewModel: MovieListViewModelProtocol {
     
     /// View Output Bindings
     enum Output {
@@ -131,7 +131,7 @@ final class MovieListViewModelImp: MovieListViewModel {
 
 
 /// MovieListDataProviderDelegate Delegate
-extension MovieListViewModelImp: MovieListDataProviderDelegate {
+extension MovieListViewModel: MovieListDataProviderDelegate {
     
     func showLoader(show: Bool) {
         output?(.showActivityIndicator(show: show))

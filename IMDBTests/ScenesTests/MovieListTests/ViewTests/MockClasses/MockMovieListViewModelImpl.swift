@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 
-class MockMovieListViewModelImpl: MovieListViewModel {
+class MockMovieListViewModelImpl: MovieListViewModelProtocol {
     var dataProvider: MovieListDataProvider!
     var coordinator: MoviesListCoordinator!
     

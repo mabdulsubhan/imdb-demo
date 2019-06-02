@@ -20,7 +20,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var movieDescription: UILabel!
     
     /// Injected Properties
-    var viewModel: MovieDetailViewModel!
+    var viewModel: MovieDetailViewModelProtocol!
     
     
     /// View Lifcycle Method
