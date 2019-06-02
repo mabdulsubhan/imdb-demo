@@ -1,4 +1,4 @@
-[Movies]<img src="Screenshots/cover.jpg"  height="560">
+[Movies]<img src="Screenshots/cover.jpg" >
 
 # IMDb-demo
 
