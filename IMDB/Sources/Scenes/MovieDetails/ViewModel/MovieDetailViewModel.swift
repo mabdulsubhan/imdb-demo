@@ -1,0 +1,84 @@
+//
+//  MovieDetailViewModel.swift
+//  IMDB
+//
+//  Created by Muhammad Abdul Subhan on 30/05/2019.
+//  Copyright © 2019 VentureDive. All rights reserved.
+//
+
+import UIKit
+
+typealias MovieDetailModelOutput = (MovieDetailViewModelImp.Output) -> ()
+
+/// MovieDetailViewModel Protocol
+protocol MovieDetailViewModel {
+    
+    var output: MovieDetailModelOutput? { get set }
+    func viewDidLoad()
+
+}
+
+/// MovieDetailViewModel Implementation
+final class MovieDetailViewModelImp: MovieDetailViewModel {
+
+    /// View Output Bindings
+    enum Output {
+        case showMovieBannerImageView(url: URL)
+        case showMovieTitle(title: String)
+        case showMovieReleaseDate(releaseDate: NSAttributedString)
+        case showMovieDescription(description: String)
+        case showMovieRating(rating: String)
+        case showMovieLanguage(lang: NSAttributedString)
+    }
+    
+    /// Stored Properties
+    var output: MovieDetailModelOutput?
+    private var movie: Movie?
+    
+    
+    /// Computed Properties
+    var bannerImageUrl: URL? {
+        return URL(string: APIConstants.ImageBaseURL + APIConstants.ImageFullSize + (movie?.posterPath ?? ""))
+    }
+  
+    func viewDidLoad() {
+        output?(.showMovieDescription(description: movie?.overview ?? ""))
+        output?(.showMovieRating(rating: "\(movie?.voteCount ?? 0)"))
+        output?(.showMovieTitle(title: movie?.title ?? ""))
+        showMovieLanguage()
+        showBannerImage()
+        showReleaseDate()
+    }
+    
+    /// Init
+    init(_ movie: Movie?) {
+        self.movie = movie
+    }
+    
+    /// Private Method
+    private func showBannerImage() {
+        
+        guard let bannerImageUrl = bannerImageUrl else { return }
+        output?(.showMovieBannerImageView(url: bannerImageUrl))
+    }
+    
+    private func showMovieLanguage() {
+        let locale = NSLocale(localeIdentifier: "en")
+        let originalLanguage = movie?.originalLanguage ?? ""
+        let languageString = locale.displayName(forKey: .languageCode, value: originalLanguage)
+        let languageSuffix = "Language: "
+        let attrString = NSMutableAttributedString(string: "\(languageSuffix)\(languageString ?? originalLanguage)")
+        attrString.addAttributes([.font : UIFont.boldSystemFont(ofSize: 14)], range: NSRange(location: 0, length: languageSuffix.count))
+        output?(.showMovieLanguage(lang: attrString))
+
+    }
+    
+    private func showReleaseDate() {
+        let date = DateTimeUtility.getReleaseDateFromString(dateString: movie?.releaseDate ?? "")
+        let dateString = DateTimeUtility.convertToLongDateFormat(from: date) ?? ""
+        let releaseDateSuffix = "Release Date: "
+        let attrString = NSMutableAttributedString(string: "\(releaseDateSuffix)\(dateString)")
+        attrString.addAttributes([.font : UIFont.boldSystemFont(ofSize: 14)], range: NSRange(location: 0, length: releaseDateSuffix.count))
+        output?(.showMovieReleaseDate(releaseDate: (attrString)))
+    }
+}
