@@ -1,5 +1,6 @@
+[Movies]<img src="Screenshots/cover.jpg"  height="560">
+
 # IMDb-demo
-IMDB - A demo app which displays movies data fetched from themoviedb.org API.
 
 ## Development
 - Swift 4.2
