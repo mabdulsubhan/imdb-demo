@@ -46,8 +46,7 @@ Code has been strucutred into two main categories, Sources and Resources:
 
 ### Code Coverage
 - Test cases for each module, logic and services are provided.
-- Code Coverage is upto 79%.
-- Find code coverage screenshot below. 
+- Code Coverage is upto 70%.
 
 ### Third Party
 - Kingfisher (For downloading and caching images)
