@@ -40,7 +40,7 @@ extension MovieListViewController: DatePickerViewDelegate {
     }
     
     func datePickerDidCancel(_ sender: DatePickerView) {
-        viewModel.didCancelFiltering()
+        viewModel.didReset()
     }
     
     func datePicker(_ sender: DatePickerView, didSelect date: Date) {

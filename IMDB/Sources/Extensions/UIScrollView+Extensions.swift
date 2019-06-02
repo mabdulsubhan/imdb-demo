@@ -11,7 +11,6 @@ import UIKit
 
 extension UIScrollView {
     
-    
     /// Method which returns whether a UIScrollView is at bottom or not
     ///
     /// - Returns: bool value

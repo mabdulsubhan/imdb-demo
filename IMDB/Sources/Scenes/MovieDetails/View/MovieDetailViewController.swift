@@ -27,7 +27,7 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModelOutput()
-        viewModel.viewDidLoad()
+        viewModel.didLoad()
         
         movieBannerImageView.addBorderGradients()
     }

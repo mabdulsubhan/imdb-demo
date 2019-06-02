@@ -14,8 +14,7 @@ typealias MovieDetailModelOutput = (MovieDetailViewModelImp.Output) -> ()
 protocol MovieDetailViewModel {
     
     var output: MovieDetailModelOutput? { get set }
-    func viewDidLoad()
-
+    func didLoad()
 }
 
 /// MovieDetailViewModel Implementation
@@ -35,13 +34,12 @@ final class MovieDetailViewModelImp: MovieDetailViewModel {
     var output: MovieDetailModelOutput?
     private var movie: Movie?
     
-    
     /// Computed Properties
     var bannerImageUrl: URL? {
         return URL(string: APIConstants.ImageBaseURL + APIConstants.ImageFullSize + (movie?.posterPath ?? ""))
     }
   
-    func viewDidLoad() {
+    func didLoad() {
         output?(.showMovieDescription(description: movie?.overview ?? ""))
         output?(.showMovieRating(rating: "\(movie?.voteCount ?? 0)"))
         output?(.showMovieTitle(title: movie?.title ?? ""))
@@ -70,7 +68,6 @@ final class MovieDetailViewModelImp: MovieDetailViewModel {
         let attrString = NSMutableAttributedString(string: "\(languageSuffix)\(languageString ?? originalLanguage)")
         attrString.addAttributes([.font : UIFont.boldSystemFont(ofSize: 14)], range: NSRange(location: 0, length: languageSuffix.count))
         output?(.showMovieLanguage(lang: attrString))
-
     }
     
     private func showReleaseDate() {

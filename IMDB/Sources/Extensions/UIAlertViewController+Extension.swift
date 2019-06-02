@@ -11,7 +11,6 @@ import UIKit
 
 extension UIAlertController {
     
-    
     /// Method which popups a UIAlertController with a given message
     ///
     /// - Parameter message: message string to be shown

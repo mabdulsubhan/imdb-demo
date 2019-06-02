@@ -12,28 +12,27 @@ typealias MoviesViewModelOutput = (MovieListViewModelImp.Output) -> ()
 
 /// MovieListViewModel Protocol
 protocol MovieListViewModel {
-    
-    var numberOfRows: Int { get }
+
     var dataProvider: MovieListDataProvider! { get }
     var coordinator: MoviesListCoordinator! { get }
+    var numberOfMovies: Int { get }
     var output: MoviesViewModelOutput? { get set }
     func getMovieListCellViewModel(index : Int) -> MovieListTableCellViewModel
-    func didSelectRow(index : Int)
-    func viewDidLoad()
+    func didSelectMovie(index : Int)
+    func didLoad()
     func tableViewDidReachToEnd()
-    func didCancelFiltering()
+    func didReset()
     func didSelectFiltering(with date: Date)
-    func onTapOnResetOrFilterButton()
+    func performCTA()
 }
 
 /// MovieListViewModel Implementation
 final class MovieListViewModelImp: MovieListViewModel {
     
-    
     /// View Output Bindings
     enum Output {
         case reloadMovies
-        case showLoader(show: Bool)
+        case showActivityIndicator(show: Bool)
         case showDatePicker(show: Bool)
         case showFilterImage(show: Bool)
         case showError(error: Error)
@@ -77,25 +76,28 @@ final class MovieListViewModelImp: MovieListViewModel {
         }
         return allMovieListViewModels
     }
-    var numberOfRows: Int {
+    
+    var numberOfMovies: Int {
         return movieDataSourceViewModels.count
     }
-    
    
-    /// View Input Muatate Methods
-    func viewDidLoad() {
+    func didLoad() {
         getUpcomingMovies()
     }
+    
     func tableViewDidReachToEnd() {
         getUpcomingMovies()
     }
+    
     func didSelectFiltering(with date: Date) {
         activateFilter(with: date)
     }
-    func onTapOnResetOrFilterButton() {
+    
+    func performCTA() {
         (isFilteringActive) ?  clearFilter() : output?(.showDatePicker(show: true))
     }
-    func didCancelFiltering() {
+    
+    func didReset() {
         output?(.showDatePicker(show: false))
     }
     
@@ -104,8 +106,8 @@ final class MovieListViewModelImp: MovieListViewModel {
     func getMovieListCellViewModel(index : Int) -> MovieListTableCellViewModel {
         return movieDataSourceViewModels[index]
     }
+    
     func getUpcomingMovies() {
-        
         if isFilteringActive == false  { dataProvider.providePaginatedUpcomingMovies() }
     }
     
@@ -115,7 +117,6 @@ final class MovieListViewModelImp: MovieListViewModel {
         output?(.showDatePicker(show: false))
         let dateString = DateFormatter.shortFormatDateFormatter.string(from: date)
         filteredMovieListViewModels = allMovieListViewModels.filter({ ($0.movie?.releaseDate ?? "") == dateString })
-        
     }
 
     private func clearFilter() {
@@ -123,7 +124,7 @@ final class MovieListViewModelImp: MovieListViewModel {
         filteredMovieListViewModels.removeAll()
     }
     
-    func didSelectRow(index: Int) {
+    func didSelectMovie(index: Int) {
         coordinator.navigateToMovieDetail(withMovie: getMovieListCellViewModel(index: index).movie)
     }
 }
@@ -133,7 +134,7 @@ final class MovieListViewModelImp: MovieListViewModel {
 extension MovieListViewModelImp: MovieListDataProviderDelegate {
     
     func showLoader(show: Bool) {
-        output?(.showLoader(show: show))
+        output?(.showActivityIndicator(show: show))
     }
     
     func onSuccess(_ upcomingMovies: UpcomingMovies) {

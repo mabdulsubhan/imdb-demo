@@ -19,7 +19,6 @@ class MovieListViewController: UIViewController {
     @IBOutlet var noDataView: UIView!
     
     var datePickerTopConstraint = NSLayoutConstraint()
-    /// Injected Properties
     var viewModel: MovieListViewModel!
  
     
@@ -28,12 +27,12 @@ class MovieListViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bindViewModelOutput()
-        viewModel.viewDidLoad()
+        viewModel.didLoad()
     }
     
     /// Outlet Actions
     @IBAction func onRightBarButtonTapped(_ sender: UIBarButtonItem) {
-        viewModel.onTapOnResetOrFilterButton()
+        viewModel.performCTA()
     }
   
     /// Methods
@@ -51,7 +50,7 @@ class MovieListViewController: UIViewController {
             switch output {
             case .reloadMovies:
                 self.movieListTableview.reloadData()
-            case .showLoader(let show):
+            case .showActivityIndicator(let show):
             show ? SVProgressHUD.show() : SVProgressHUD.dismiss()
             case .showError(let error):
                 UIAlertController.showAlert(withMessage: error.localizedDescription)

@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 /// Netwworking Protocol
 protocol Networking {
     

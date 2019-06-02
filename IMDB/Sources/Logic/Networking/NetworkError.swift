@@ -32,7 +32,6 @@ extension NetworkError: LocalizedError {
         case .unknown:
             return "Unknown, known error."
         }
-        
     }
 }
 

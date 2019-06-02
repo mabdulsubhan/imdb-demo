@@ -11,7 +11,6 @@ import UIKit
 
 public extension UITableView {
     
-    
     /// Method which registers a cellType T with xib name T from bundle
     ///
     /// - Parameters:
@@ -36,7 +35,6 @@ public extension UITableView {
     }
 }
 
-
 protocol ReusableView {
     static var reuseIdentifier: String { get }
 }
@@ -46,7 +44,6 @@ extension ReusableView {
     static var reuseIdentifier: String {
         return String(describing: self)
     }
-    
 }
 
 extension UITableViewCell: ReusableView {}

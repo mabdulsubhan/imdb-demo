@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    
     /// Setting Navigation Bar UI
     private func setNavBarUI() {
         UINavigationBar.appearance().barTintColor = UIColor.black
@@ -29,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         UINavigationBar.appearance().isTranslucent = false
     }
-    
     
     /// Navigation handler for startup
     private func navigateToRootVC() {
