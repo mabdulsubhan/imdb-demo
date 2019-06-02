@@ -34,8 +34,8 @@ $ pod install
 ## Technical Notes
 
 ### Architecture
-- The architecture of this app is based on MVVM along with Builder and Coordinator.
-- Builder is used for modules construction.
+- The architecture of this app is based on MVVM along with Factory and Coordinator.
+- Factory is used for modules construction.
 - Coordinator is used for navigation.
 - Closures are used for ViewModels to View bindings.
 
