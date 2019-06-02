@@ -26,7 +26,7 @@ class MoviesListCoordinatorImpl: MoviesListCoordinator {
 extension MoviesListCoordinatorImpl {
     
     func navigateToMovieDetail(withMovie movie: Movie?) {
-        let detailController = MovieDetailBuilderImpl().build(withMovie: movie)
+        let detailController = SceneFactory.shared().getScene(sceneType: .MovieDetail, withMovie: movie)
         view?.navigationController?.pushViewController(detailController, animated: true)
     }
 }

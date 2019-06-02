@@ -33,7 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func navigateToRootVC() {
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: MoviesListBuilderImpl().build())
+        let moviesListScene = SceneFactory.shared().getScene(sceneType: .MovieList)
+        window?.rootViewController = UINavigationController(rootViewController: moviesListScene)
     }
     
 }
